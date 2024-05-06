@@ -7,7 +7,6 @@
     - hydra 
     - hashcat
     - john the ripper
-    - man in the midle
     - metasploit 
     - nettercap
     
