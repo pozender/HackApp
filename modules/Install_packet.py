@@ -66,10 +66,3 @@ def install_packages(os_var, kernel_var, windows_version_var):
         progress_window.destroy()
     else:
         messagebox.showinfo("Installation Cancelled", "Package installation cancelled.")
-
-# Main script (exemple d'utilisation)
-os_var = "Linux"  # Remplacer par le choix du système d'exploitation
-kernel_var = "Fedora"  # Remplacer par le choix du noyau pour Linux
-windows_version_var = ""  # Remplacer par le choix de la version de Windows
-
-install_packages(os_var, kernel_var, windows_version_var)
