@@ -19,7 +19,7 @@ def relative_to_assets(path: str) -> Path:
 
 
 window = Tk()
-
+window.title("NMAP")
 window.geometry("900x800")
 window.configure(bg = "#CECECE")
 
