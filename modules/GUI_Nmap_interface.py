@@ -14,6 +14,8 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"frame0")
 
 
+    
+
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -68,7 +70,7 @@ canvas.create_text(
     105.0,
     124.0,
     anchor="nw",
-    text="@IP/mask",
+    text="@IP_ADDRESS",
     fill="#000000",
     font=("RobotoRoman Bold", 24 * -1)
 )
