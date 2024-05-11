@@ -3,24 +3,25 @@ from tkinter import messagebox
 import subprocess
 
 def check_packages():
-    if os_var.get() == "Linux":
-        if kernel_var.get() == "":
-            messagebox.showwarning("Kernel Not Selected", "Please select a kernel.")
-            return
-        else:
-            kernel_type = kernel_var.get()
-            required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
-    elif os_var.get() == "Windows":
-        if windows_version_var.get() == "":
-            messagebox.showwarning("Windows Version Not Selected", "Please select a Windows version.")
-            return
-        else:
-            kernel_type = windows_version_var.get()
-            required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
-    else:  # macOS
-        kernel_type = "macOS"
-        required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
-
+    # if os_var.get() == "Linux":
+    #     if kernel_var.get() == "":
+    #         messagebox.showwarning("Kernel Not Selected", "Please select a kernel.")
+    #         return
+    #     else:
+    #         kernel_type = kernel_var.get()
+    #         required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
+    # # elif os_var.get() == "Windows":
+    # #     if windows_version_var.get() == "":
+    # #         messagebox.showwarning("Windows Version Not Selected", "Please select a Windows version.")
+    # #         return
+    # #     else:
+    # #         kernel_type = windows_version_var.get()
+    # #         required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
+    # # else:  # macOS
+    # #     kernel_type = "macOS"
+    # #     required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
+   
+    required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
     missing_packages = []
     for package in required_packages:
         try:
@@ -37,21 +38,21 @@ def check_packages():
         messagebox.showinfo("Packages Installed", "All required packages are installed.")
 
 def select_os():
-    if os_var.get() == "Windows":
-        windows_frame.pack()
-        kernel_frame.pack_forget()
-    elif os_var.get() == "Linux":
+    # if os_var.get() == "Windows":
+    #     windows_frame.pack()
+    #     kernel_frame.pack_forget()
+    if os_var.get() == "Linux":
         kernel_frame.pack()
         windows_frame.pack_forget()
-    else:  # macOS
-        kernel_frame.pack_forget()
-        windows_frame.pack_forget()
+    # else:  # macOS
+    #     kernel_frame.pack_forget()
+    #     windows_frame.pack_forget()
 
 def select_kernel():
     messagebox.showinfo("Kernel Type", f"Selected kernel: {kernel_var.get()}")
 
-def select_windows_version():
-    messagebox.showinfo("Windows Version", f"Selected Windows version: {windows_version_var.get()}")
+# def select_windows_version():
+#     messagebox.showinfo("Windows Version", f"Selected Windows version: {windows_version_var.get()}")
 
 # GUI
 root = tk.Tk()
@@ -63,7 +64,7 @@ os_label.pack()
 
 os_var = tk.StringVar()
 os_var.set("Linux")  # Default selection
-os_options = ["Linux", "Windows", "macOS"]
+os_options = ["Linux"] # rajouter macOS et windows dans ce tableau pour permettre le multi-plateforme
 for os_type in os_options:
     os_radio = tk.Radiobutton(root, text=os_type, variable=os_var, value=os_type, command=select_os)
     os_radio.pack()
@@ -83,15 +84,15 @@ for kernel in kernel_options:
 
 windows_frame = tk.Frame(root)
 
-windows_label = tk.Label(windows_frame, text="Select Windows Version:")
-windows_label.pack()
+# windows_label = tk.Label(windows_frame, text="Select Windows Version:")
+# windows_label.pack()
 
-windows_version_var = tk.StringVar()
-windows_version_var.set("")  # Default selection
-windows_version_options = ["Windows 10", "Windows 11"]
-for windows_version in windows_version_options:
-    windows_version_radio = tk.Radiobutton(windows_frame, text=windows_version, variable=windows_version_var, value=windows_version)
-    windows_version_radio.pack()
+# windows_version_var = tk.StringVar()
+# windows_version_var.set("")  # Default selection
+# windows_version_options = ["Windows 10", "Windows 11"]
+# for windows_version in windows_version_options:
+#     windows_version_radio = tk.Radiobutton(windows_frame, text=windows_version, variable=windows_version_var, value=windows_version)
+#     windows_version_radio.pack()
 
 check_button = tk.Button(root, text="Check Packages", command=check_packages)
 check_button.pack()
