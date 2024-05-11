@@ -21,7 +21,7 @@ def check_packages():
     # #     kernel_type = "macOS"
     # #     required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
    
-    required_packages = ["aircrack-ng", "nmap", "hydra", "hashcat", "john", "metasploit", "nettercap"]
+    required_packages = ["aircrack-ng", "git", "hydra", "hashcat", "john", "metasploit", "nettercap" ,"nmap"]
     missing_packages = []
     for package in required_packages:
         try:
@@ -60,8 +60,12 @@ def install_packages(requirements_packages):
             print(f"Failed to install package {package}.")
        
         if package == "nmap":
-            subprocess.run(["cd" , ""])
-            subprocess.run(["sudo", "wget", "install"])
+            if "/usr/share/nmap/scripts" is None:
+                subprocess.run(["cd" , "/usr/share/nmap/scripts"])
+                subprocess.run(["git", "clone", "https://github.com/vulnersCom/nmap-vulners.git"])
+                # exemple use : nmap -sV --script nmap-vulners/ -p 22 89.0.142.86  -> analyse des vulnérabilitées de SSH ou tout autre truc sur le port 22
+            else :
+                messagebox.showinfo("Nmap Scripts", "Nmap scripts already installed. PLease delete what is in /usr/share/nmap/scripts if this is not the nmap scripts and try again.")
 # def select_windows_version():
 #     messagebox.showinfo("Windows Version", f"Selected Windows version: {windows_version_var.get()}")
 
