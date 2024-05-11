@@ -67,7 +67,9 @@ def Nmap_vulners(ip):
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
+def close_window(nom_fichier):
+    window.destroy()
+    subprocess.run(["python3", nom_fichier])
 
 window = Tk()
 window.title("NMAP")
@@ -215,6 +217,22 @@ button_5.place(
     y=374.0,
     width=183.0,
     height=53.0
+)
+
+button_image_6 = PhotoImage(
+    file=relative_to_assets("button_6.png"))
+button_6 = Button(
+    image=button_image_6,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: close_window("modules/GUI_Accueil.py"),
+    relief="flat"
+)
+button_6.place(
+    x=802.0,
+    y=32.0,
+    width=62.0,
+    height=55.0
 )
 
 canvas.create_text(
