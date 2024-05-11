@@ -35,31 +35,49 @@ canvas = Canvas(
 )
 
 canvas.place(x = 0, y = 0)
+canvas.create_text(
+    380.0,
+    32.0,
+    anchor="nw",
+    text="NMAP",
+    fill="#000000",
+    font=("RobotoRoman Bold", 48 * -1)
+)
+
 entry_image_1 = PhotoImage(
     file=relative_to_assets("entry_1.png"))
 entry_bg_1 = canvas.create_image(
-    450.0,
-    60.0,
+    239.5,
+    177.5,
     image=entry_image_1
 )
-entry_1 = Text(
+entry_1 = Entry(
     bd=0,
-    bg="#000000",
+    bg="#FFFFFF",
     fg="#000716",
     highlightthickness=0
 )
 entry_1.place(
-    x=380.0,
-    y=32.0,
-    width=140.0,
-    height=54.0
+    x=111.0,
+    y=161.0,
+    width=257.0,
+    height=31.0
+)
+
+canvas.create_text(
+    105.0,
+    124.0,
+    anchor="nw",
+    text="@IP/mask",
+    fill="#000000",
+    font=("RobotoRoman Bold", 24 * -1)
 )
 
 entry_image_2 = PhotoImage(
     file=relative_to_assets("entry_2.png"))
 entry_bg_2 = canvas.create_image(
-    239.5,
-    177.5,
+    693.5,
+    179.5,
     image=entry_image_2
 )
 entry_2 = Entry(
@@ -69,70 +87,19 @@ entry_2 = Entry(
     highlightthickness=0
 )
 entry_2.place(
-    x=111.0,
-    y=161.0,
-    width=257.0,
-    height=31.0
-)
-
-entry_image_3 = PhotoImage(
-    file=relative_to_assets("entry_3.png"))
-entry_bg_3 = canvas.create_image(
-    234.0,
-    138.0,
-    image=entry_image_3
-)
-entry_3 = Text(
-    bd=0,
-    bg="#000000",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_3.place(
-    x=105.0,
-    y=124.0,
-    width=258.0,
-    height=26.0
-)
-
-entry_image_4 = PhotoImage(
-    file=relative_to_assets("entry_4.png"))
-entry_bg_4 = canvas.create_image(
-    693.5,
-    179.5,
-    image=entry_image_4
-)
-entry_4 = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_4.place(
     x=565.0,
     y=163.0,
     width=257.0,
     height=31.0
 )
 
-entry_image_5 = PhotoImage(
-    file=relative_to_assets("entry_5.png"))
-entry_bg_5 = canvas.create_image(
-    688.0,
-    140.0,
-    image=entry_image_5
-)
-entry_5 = Text(
-    bd=0,
-    bg="#000000",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_5.place(
-    x=559.0,
-    y=126.0,
-    width=258.0,
-    height=26.0
+canvas.create_text(
+    559.0,
+    126.0,
+    anchor="nw",
+    text="PORT",
+    fill="#000000",
+    font=("RobotoRoman Bold", 24 * -1)
 )
 
 button_image_1 = PhotoImage(
@@ -215,24 +182,13 @@ button_5.place(
     height=53.0
 )
 
-entry_image_6 = PhotoImage(
-    file=relative_to_assets("entry_6.png"))
-entry_bg_6 = canvas.create_image(
-    455.5,
-    309.0,
-    image=entry_image_6
-)
-entry_6 = Text(
-    bd=0,
-    bg="#000000",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_6.place(
-    x=246.0,
-    y=285.0,
-    width=419.0,
-    height=46.0
+canvas.create_text(
+    246.0,
+    285.0,
+    anchor="nw",
+    text="/home/user/",
+    fill="#000000",
+    font=("RobotoRoman Bold", 24 * -1)
 )
 window.resizable(False, False)
 window.mainloop()
