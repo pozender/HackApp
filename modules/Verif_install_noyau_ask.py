@@ -51,6 +51,17 @@ def select_os():
 def select_kernel():
     messagebox.showinfo("Kernel Type", f"Selected kernel: {kernel_var.get()}")
 
+def install_packages(requirements_packages):
+    for package in requirements_packages:
+        subprocess.run(["sudo", "apt", "install", "-y", package ], check=True)
+        if subprocess.run(["sudo", "apt", "install", "-y", package ], check=True) == True:
+            print(f"Package {package} installed successfully.")
+        else:
+            print(f"Failed to install package {package}.")
+       
+        if package == "nmap":
+            subprocess.run(["cd" , ""])
+            subprocess.run(["sudo", "wget", "install"])
 # def select_windows_version():
 #     messagebox.showinfo("Windows Version", f"Selected Windows version: {windows_version_var.get()}")
 
