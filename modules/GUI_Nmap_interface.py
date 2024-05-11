@@ -13,7 +13,25 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"frame0")
 
+from re import *
+import re
 
+def is_valid_ip(ip):
+    pattern = r'^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+    return re.match(pattern, ip) is not None
+
+def Nmap_vulners(entree):
+
+    # implémentation de l'utilisation de la commande de nmap Vulners
+    # exemple : nmap -sV --script nmap-vulners/ -p 22 89.0.142.86
+    if entry_1 != None:
+        ip=entry_1
+        if is_valid_ip(ip):
+            print("L'adresse IP est valide.")
+            # subprocess.run(["nmap", "-sV", "--script", "nmap-vulners", "-p", "22", ip], check=True)4
+        else:
+            print("L'adresse IP n'est pas valide.")
+            
     
 
 def relative_to_assets(path: str) -> Path:
@@ -142,7 +160,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: Nmap_vulners(entry_1),
     relief="flat"
 )
 button_3.place(
