@@ -7,27 +7,63 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"frame0")
 
 
-def is_valid_ip(ip):
+def test_valid_ip(ip):
     pattern = r'^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
     return re.match(pattern, ip) is not None
 
-def Nmap_vulners(ip):
+def Nmap_port(ip):
+    port = entry_2.get()
+    test_port = port.split("-")
+    intervalle_start = int(test_port[0])
+    intervalle_end = int(test_port[1])
+    ip = entry_1.get()  
+    if ip != None and port != None and intervalle_start > 0 and intervalle_end < 65536  and test_valid_ip(ip):   
+        print("pas fait")
+        subprocess.run(["nmap", "-pV", port, ip , ">" , "nmap-port.txt"])        
+    else:
+        messagebox.showinfo("Error", "The IP address or the Port are not valid, please enter a valid one.")          
+def Nmap_os(ip):
+    if ip != None and test_valid_ip(ip):
+        
+        subprocess.run(["nmap", "-V", "-O", ip , ">" , "nmap-os.txt"])
+    else:
+        messagebox.showinfo("Error", "The IP address is not valid, please enter a valid one.")      
 
-    # implémentation de l'utilisation de la commande de nmap Vulners
-    # exemple : nmap -sV --script nmap-vulners/ -p 22 89.0.142.86
-    if entry_1.get() != None:
-        ip=entry_1.get()
-        if is_valid_ip(ip):
-            messagebox.showwarning("L'adresse IP est valide.")
-            
-            subprocess.run(["ping" , ip , "-c" , "3"], check=True)
-            subprocess.run(["nmap", "-sV", "--script", "nmap-vulners", "-p", "22", ip , ">" , "nmap-vulners.txt"])
-            messagebox.showwarning(" Le résultat des tests a été ecrit dans le fichier : nmap-vulners.txt")
-            
-        else:
-            messagebox.showwarning("L'adresse IP n'est pas valide,  merci dans renseigner une de valide.")
-            
-    
+def Nmap_vulners(ip):
+    port_char = entry_2.get()
+    port = int(port_char)
+    ip=entry_1.get()
+    if ip != None:
+        if port == None:
+            if test_valid_ip(ip):
+                messagebox.showinfo("Validation", "The IP address is valid.")
+                subprocess.run(["ping" , ip , "-c" , "3"], check=True)
+                subprocess.run(["nmap", "-sV", "--script", "nmap-vulners", ip , ">" , "nmap-vulners.txt"])
+                messagebox.showinfo("Finish", "The test results were written to the file: nmap-vulners.txt")
+
+            else:
+                messagebox.showinfo("Error", "The IP address is not valid, please enter a valid one.")
+
+        else :
+            if port > 1 :
+                if port < 65535 :
+                    if test_valid_ip(ip):
+                        messagebox.showinfo("Validation", "The IP address and Port are validated." )
+
+                        subprocess.run(["ping" , ip , "-c" , "3"], check=True)
+                        subprocess.run(["nmap", "-sV", "--script", "nmap-vulners", "-p", str(port), ip , ">" , "nmap-vulners.txt"])
+                        messagebox.showinfo("Finish", "The test results were written to the file: nmap-vulners.txt")
+
+
+                    else:
+                        messagebox.showinfo("Error", "The IP address is not valid, please enter a valid one.")
+                        
+                else :
+                    messagebox.showinfo("Error", "The port must be between 1 and 65535.")
+            else:
+                messagebox.showinfo("Error", "The port must be between 1 and 65535.")
+
+
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -123,7 +159,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: Nmap_port(entry_1.get()),
     relief="flat"
 )
 button_1.place(
@@ -139,7 +175,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: Nmap_os(entry_1.get()),
     relief="flat"
 )
 button_2.place(
@@ -160,22 +196,6 @@ button_3 = Button(
 )
 button_3.place(
     x=493.0,
-    y=594.0,
-    width=120.0,
-    height=43.0
-)
-
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=682.0,
     y=594.0,
     width=120.0,
     height=43.0
