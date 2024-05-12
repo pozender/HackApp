@@ -2,6 +2,7 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess as subprocess
+import src.webbrowser as webbrowser
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"frame0_acc")
@@ -45,7 +46,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: webbrowser.open_new("https://github.com/pozender/HackApp"),
     relief="flat"
 )
 button_1.place(

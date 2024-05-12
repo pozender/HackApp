@@ -38,7 +38,7 @@ def Nmap_vulners(ip):
             if test_valid_ip(ip):
                 messagebox.showinfo("Validation", "The IP address is valid.")
                 subprocess.run(["ping" , ip , "-c" , "3"], check=True)
-                subprocess.run(["nmap", "-sV", "--script", "nmap-vulners", ip , ">" , "nmap-vulners.txt"])
+                subprocess.run(["nmap", "-sV", "--script", "/usr/share/nmap/scripts/vulners", ip , ">" , "nmap-vulners.txt"])
                 messagebox.showinfo("Finish", "The test results were written to the file: nmap-vulners.txt")
 
             else:
