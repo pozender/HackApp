@@ -34,6 +34,7 @@ def check_packages():
     
     if missing_packages:
         messagebox.showwarning("Packages Missing", f"The following packages are missing: {', '.join(missing_packages)}")
+        install_packages(missing_packages)
     else:
         messagebox.showinfo("Packages Installed", "All required packages are installed.")
 
@@ -58,9 +59,10 @@ def install_packages(requirements_packages):
             print(f"Package {package} installed successfully.")
         else:
             print(f"Failed to install package {package}.")
-       
+        if package == "metasploit-framework":
+            subprocess.run(["sudo" , "apt" , "install" , ""])
         if package == "nmap":
-            if "/usr/share/nmap/scripts" is None:
+            if "/usr/share/nmap/scripts" == None:
                 subprocess.run(["cd" , "/usr/share/nmap/scripts"])
                 subprocess.run(["git", "clone", "https://github.com/vulnersCom/nmap-vulners.git"])
                 # exemple use : nmap -sV --script nmap-vulners/ -p 22 89.0.142.86  -> analyse des vulnérabilitées de SSH ou tout autre truc sur le port 22
